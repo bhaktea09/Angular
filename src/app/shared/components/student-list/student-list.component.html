@@ -1,0 +1,31 @@
+<form [formGroup]="studentForm" (ngSubmit)="onSubmit()" class="p-3 border rounded shadow-sm">
+  <input formControlName="id" type="hidden">
+  <div class="mb-3">
+    <label class="form-label">First Name:</label>
+    <input formControlName="firstName" class="form-control">
+    <div *ngIf="studentForm.get('firstName')?.errors?.['required']" class="text-danger">First name is required.</div>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Last Name:</label>
+    <input formControlName="lastName" class="form-control">
+    <div *ngIf="studentForm.get('lastName')?.errors?.['required']" class="text-danger">Last name is required.</div>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Email:</label>
+    <input formControlName="email" type="email" class="form-control">
+    <div *ngIf="studentForm.get('email')?.errors?.['required']" class="text-danger">Email is required.</div>
+    <div *ngIf="studentForm.get('email')?.errors?.['email']" class="text-danger">Email is invalid.</div>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<div class="mt-4">
+  <h3>Student List</h3>
+  <div *ngFor="let student of students" class="d-flex justify-content-between align-items-center border p-2 mb-2 rounded">
+    <span>{{ student.firstName }} {{ student.lastName }}</span>
+    <div>
+      <button class="btn btn-primary btn-sm" (click)="editStudent(student)">Edit</button>
+      <button class="btn btn-danger btn-sm" (click)="deleteStudent(student.id)">Delete</button>
+    </div>
+  </div>
+</div>

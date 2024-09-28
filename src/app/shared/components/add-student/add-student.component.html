@@ -1,0 +1,51 @@
+<div class="container">
+  <h2>Add Student</h2>
+  <form [formGroup]="studentForm" (ngSubmit)="addStudent()">
+    <div class="form-group">
+      <label for="firstName">First Name:</label>
+      <input
+        id="firstName"
+        type="text"
+        class="form-control"
+        formControlName="firstName"
+      />
+      <div *ngIf="(studentForm.get('firstName')?.invalid && (studentForm.get('firstName')?.touched || submitted))" class="text-danger">
+        <div *ngIf="studentForm.get('firstName')?.errors?.['required']">First name is required.</div>
+        <div *ngIf="studentForm.get('firstName')?.errors?.['minlength']">First name must be at least 2 characters long.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Last Name:</label>
+      <input
+        id="lastName"
+        type="text"
+        class="form-control"
+        formControlName="lastName"
+      />
+      <div *ngIf="(studentForm.get('lastName')?.invalid && (studentForm.get('lastName')?.touched || submitted))" class="text-danger">
+        <div *ngIf="studentForm.get('lastName')?.errors?.['required']">Last name is required.</div>
+        <div *ngIf="studentForm.get('lastName')?.errors?.['minlength']">Last name must be at least 2 characters long.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input
+        id="email"
+        type="email"
+        class="form-control"
+        formControlName="email"
+      />
+      <div *ngIf="(studentForm.get('email')?.invalid && (studentForm.get('email')?.touched || submitted))" class="text-danger">
+        <div *ngIf="studentForm.get('email')?.errors?.['required']">Email is required.</div>
+        <div *ngIf="studentForm.get('email')?.errors?.['email']">Email is invalid.</div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="studentForm.invalid">Add Student</button>
+
+    <div *ngIf="successMessage" class="alert alert-success mt-3">{{ successMessage }}</div>
+    <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+  </form>
+</div>

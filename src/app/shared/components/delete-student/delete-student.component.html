@@ -1,0 +1,23 @@
+<!-- delete-student.component.html -->
+<div class="container mt-4">
+  <h2 class="mb-4">Delete Student</h2>
+  <form [formGroup]="deleteStudentForm" (ngSubmit)="deleteStudent()" class="border p-4 rounded shadow-sm">
+    <div class="form-group mb-3">
+      <label for="studentId" class="form-label">Student ID:</label>
+      <input
+        id="studentId"
+        type="number"
+        class="form-control"
+        formControlName="studentId"
+      />
+      <div *ngIf="deleteStudentForm.get('studentId')?.invalid && deleteStudentForm.get('studentId')?.touched" class="text-danger">
+        <div *ngIf="deleteStudentForm.get('studentId')?.errors?.['required']">Student ID is required.</div>
+        <div *ngIf="deleteStudentForm.get('studentId')?.errors?.['min']">Student ID must be a positive number.</div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-danger" [disabled]="deleteStudentForm.invalid">Delete Student</button>
+  </form>
+
+  <div *ngIf="message" class="alert alert-info mt-3">{{ message }}</div>
+</div>
